@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("WebApplication3")]
 namespace PlatformyProgramistyczneAPI.F1Api
 {
+    
     internal class DriverDb : Driver
     {
         public int id { get; set; }

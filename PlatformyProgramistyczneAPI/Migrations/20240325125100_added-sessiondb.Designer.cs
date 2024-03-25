@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlatformyProgramistyczneAPI.F1Api;
 
@@ -10,9 +11,11 @@ using PlatformyProgramistyczneAPI.F1Api;
 namespace PlatformyProgramistyczneAPI.Migrations
 {
     [DbContext(typeof(DriversDatabase))]
-    partial class DriversDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20240325125100_added-sessiondb")]
+    partial class addedsessiondb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.3");
@@ -149,26 +152,6 @@ namespace PlatformyProgramistyczneAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Sessions");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 1,
-                            circuit_key = 1,
-                            circuit_short_name = "test",
-                            country_code = "test",
-                            country_key = 1,
-                            country_name = "test",
-                            date_end = new DateTime(2024, 3, 25, 13, 55, 42, 647, DateTimeKind.Local).AddTicks(392),
-                            date_start = new DateTime(2024, 3, 25, 13, 55, 42, 647, DateTimeKind.Local).AddTicks(337),
-                            gmt_offset = "test",
-                            location = "test",
-                            meeting_key = 1,
-                            session_key = 1,
-                            session_name = "test",
-                            session_type = "test",
-                            year = 1
-                        });
                 });
 #pragma warning restore 612, 618
         }

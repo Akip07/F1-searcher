@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace PlatformyProgramistyczneAPI
 
             driversDatabase = new DriversDatabase();
         }
-        private void AddToDatabase(int driver_number = 0,string broadcast_name = "test",string full_name = "test",string name_acronym = "test",string team_name = "test",string team_colour = "test",string first_name = "test",string last_name = "test",string headshot_url = "test",string country_code = "test",int session_key = 1,int meeting_key = 1)
+        private void AddDriver(int driver_number = 0,string broadcast_name = "test",string full_name = "test",string name_acronym = "test",string team_name = "test",string team_colour = "test",string first_name = "test",string last_name = "test",string headshot_url = "test",string country_code = "test",int session_key = 1,int meeting_key = 1)
         {
             driversDatabase.Drivers.Add(new DriverDb()
             {
@@ -35,7 +36,19 @@ namespace PlatformyProgramistyczneAPI
             });
             driversDatabase.SaveChanges();
         }
-        private void ClearDatabase()
+
+        private void AddDriver(Driver driver) 
+        {
+            DriverDb temp = new DriverDb();
+            PropertyInfo[] properties = typeof(Driver).GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                property.SetValue(temp, property.GetValue(driver));
+            }
+            driversDatabase.Drivers.Add(temp);
+            driversDatabase.SaveChanges();
+        }
+        private void ClearDrivers()
         {
             driversDatabase.Drivers.RemoveRange(driversDatabase.Drivers);
             driversDatabase.SaveChanges(true);
@@ -58,14 +71,27 @@ namespace PlatformyProgramistyczneAPI
         public void RunProgram()
         {
 
-            //AddToDatabase();
-            List<DriverDb> drivers = driversDatabase.Drivers.ToList<DriverDb>();
-            //List<DriverDb> ferrariDrivers = GetDriversFromTeam("Ferrari");
-            //RemoveDriver(7);
-            foreach (DriverDb driver in drivers)
+            
+            //List<DriverDb> drivers = driversDatabase.Drivers.ToList<DriverDb>();
+            //List<SessionDb> sessions = driversDatabase.Sessions.ToList<SessionDb>();
+
+            //ClearDrivers();
+            //OpenF1Api f = new OpenF1Api();
+            //List<Driver> drivers = f.GetSessionDrivers(7763).Result;
+            //Console.WriteLine(drivers[0].ToString());
+            //AddDriver(drivers[0]);
+
+            List<DriverDb> driversDb = driversDatabase.Drivers.ToList<DriverDb>();
+            //Console.WriteLine(driversDb.Count);
+            foreach (DriverDb driver in driversDb)
             {
                 Console.WriteLine(driver.ToString());
             }
+
+
+
+
+
 
 
         }
