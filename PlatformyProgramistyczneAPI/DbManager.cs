@@ -48,6 +48,12 @@ namespace PlatformyProgramistyczneAPI
             foreach (PropertyInfo property in properties)
             {
                 property.SetValue(temp, property.GetValue(driver));
+                
+            }
+            if(temp.headshot_url ==null || temp.headshot_url == "")
+            {
+                string url = "https://static.vecteezy.com/system/resources/previews/028/569/170/original/single-man-icon-people-icon-user-profile-symbol-person-symbol-businessman-stock-vector.jpg";
+                temp.headshot_url = url;
             }
             driversDatabase.Drivers.Add(temp);
             driversDatabase.SaveChanges();
@@ -133,6 +139,7 @@ namespace PlatformyProgramistyczneAPI
             AddSession(sessions);
 
         }
+        
         public void PrintSessions()
         {
             List<SessionDb> sessions = driversDatabase.Sessions.ToList<SessionDb>();
@@ -140,6 +147,21 @@ namespace PlatformyProgramistyczneAPI
             {
                 Console.WriteLine(session.ToString());
             }
+        }
+
+
+        
+
+        public void DriversFromSession(int key)
+        {
+            List<DriverDb> drivers = driversDatabase.Drivers.Where(d => d.session_key==key).ToList<DriverDb>();
+            if(drivers.Count == 0)
+            {
+                List<Driver> temp = api.GetSessionDrivers(key).Result;
+                AddDriver(temp);
+                drivers = driversDatabase.Drivers.Where(d => d.session_key == key).ToList<DriverDb>();
+            }
+            
         }
 
 
