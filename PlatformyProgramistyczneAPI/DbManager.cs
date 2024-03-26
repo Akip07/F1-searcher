@@ -50,14 +50,51 @@ namespace PlatformyProgramistyczneAPI
                 property.SetValue(temp, property.GetValue(driver));
                 
             }
-            if(temp.headshot_url ==null || temp.headshot_url == "")
+            if(temp.headshot_url ==null )
             {
-                string url = "https://static.vecteezy.com/system/resources/previews/028/569/170/original/single-man-icon-people-icon-user-profile-symbol-person-symbol-businessman-stock-vector.jpg";
-                temp.headshot_url = url;
+                string url = "https://stbannandale.syd.catholic.edu.au/wp-content/uploads/sites/19/2019/09/Person-Icon.jpg";
+                var driver2 = driversDatabase.Drivers.FirstOrDefault(d => d.full_name==temp.full_name && d.headshot_url!=null && d.headshot_url!=url);
+                if(driver2 != null)
+                {
+                    temp.headshot_url = driver2.headshot_url;
+                }
+                else
+                {
+                    temp.headshot_url = url;
+                }
+            if(temp.team_colour == null)
+                {
+                    string color = "darkgrey";
+                     driver2 = driversDatabase.Drivers.FirstOrDefault(d => d.full_name == temp.full_name && d.team_colour != null && d.team_colour != color);
+                    if (driver2 != null)
+                    {
+                        temp.team_colour = driver2.team_colour;
+                    }
+                    else
+                    {
+                        temp.team_colour = color;
+                    }
+                }
+                if (temp.team_name == null)
+                {
+                    string fillerTeam = "   ";
+                    driver2 = driversDatabase.Drivers.FirstOrDefault(d => d.full_name == temp.full_name && d.team_name != null && d.team_name != fillerTeam);
+                    if (driver2 != null)
+                    {
+                        temp.team_name = driver2.team_name;
+                    }
+                    else
+                    {
+                        temp.team_colour = fillerTeam;
+                    }
+                }
+
             }
             driversDatabase.Drivers.Add(temp);
             driversDatabase.SaveChanges();
         }
+
+
         public void AddDriver(List<Driver> drivers)
         {
             foreach (Driver driver in drivers)
@@ -65,11 +102,15 @@ namespace PlatformyProgramistyczneAPI
                 AddDriver(driver);
             }
         }
+
+
         public void ClearDrivers()
         {
             driversDatabase.Drivers.RemoveRange(driversDatabase.Drivers);
             driversDatabase.SaveChanges(true);
         }
+
+
 
         public List<DriverDb> GetDriversFromTeam(string team_name)
         {
@@ -78,12 +119,16 @@ namespace PlatformyProgramistyczneAPI
            
         }
 
+
+
         public void RemoveDriver(int id)
         {
             var driver = driversDatabase.Drivers.First(d => d.id == id);
             driversDatabase.Drivers.Remove(driver);
             driversDatabase.SaveChanges();
         }
+
+
 
         public void ReplaceDriversDbBySession(int key)
         {
@@ -92,6 +137,9 @@ namespace PlatformyProgramistyczneAPI
             
             AddDriver(drivers);
         }
+
+
+
         public void ReplaceDriversDbByTeam(string team)
         {
             ClearDrivers();
@@ -164,33 +212,13 @@ namespace PlatformyProgramistyczneAPI
             
         }
 
-
-        public void RunProgram()
+        public bool CheckIfDriversEmpty()
         {
-
-            
-            //List<DriverDb> drivers = driversDatabase.Drivers.ToList<DriverDb>();
-            //List<SessionDb> sessions = driversDatabase.Sessions.ToList<SessionDb>();
-
-            //ClearDrivers();
-            //OpenF1Api f = new OpenF1Api();
-            //List<Driver> drivers = f.GetSessionDrivers(7763).Result;
-            ////Console.WriteLine(drivers[0].ToString());
-            ////AddDriver(drivers[0]);
-
-            ////List<DriverDb> driversDb = driversDatabase.Drivers.ToList<DriverDb>();
-            ////Console.WriteLine(driversDb.Count);
-            //foreach (Driver driver in drivers)
-            //{
-            //    AddDriver(driver);
-            //}
-
-
-
-
-
-
-
+            DriverDb drivers = driversDatabase.Drivers.FirstOrDefault();
+            return drivers==null? true: false;
         }
+
+
+        
     }
 }

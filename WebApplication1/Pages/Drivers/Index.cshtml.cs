@@ -29,7 +29,9 @@ namespace WebApplication1.Pages.Drivers
         public async Task OnGetAsync(int key=0)
         {
             if(key==0)
-                DriverDb = await _context.Drivers.ToListAsync();
+                DriverDb = await _context.Drivers.GroupBy(x => x.full_name)
+            .Select(g => g.First())
+            .ToListAsync();
             else
             {
                 DbManager run = new DbManager();

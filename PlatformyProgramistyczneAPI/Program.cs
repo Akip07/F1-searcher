@@ -27,9 +27,9 @@ namespace PlatformyProgramistyczneAPI
             //    Console.WriteLine(driver.last_name);
             //}
             //Console.WriteLine("Version: " + System.Environment.Version.ToString());
-            DbManager run = new DbManager();
-            run.ReplaceDriversDbBySession(7787);
-            run.PrintDrivers();
+            
+            OpenF1Api api = new OpenF1Api();
+            List<Driver> drivers = api.GetSessionDrivers(9472).Result;
 
 
             
