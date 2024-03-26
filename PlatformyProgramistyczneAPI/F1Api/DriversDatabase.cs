@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("WebApplication3")]
+[assembly: InternalsVisibleTo("WebApplication1")]
 namespace PlatformyProgramistyczneAPI.F1Api
 {
-    internal class DriversDatabase : DbContext
+    public class DriversDatabase : DbContext
     {
         public DbSet<DriverDb> Drivers { get; set; }
         public DbSet<SessionDb> Sessions { get; set; }

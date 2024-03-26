@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-[assembly: InternalsVisibleTo("WebApplication3")]
+[assembly: InternalsVisibleTo("WebApplication1")]
 namespace PlatformyProgramistyczneAPI.F1Api
 {
-    internal class Session
+    public class Session
     {
         public int session_key { get; set; }
         public string session_name { get; set; }

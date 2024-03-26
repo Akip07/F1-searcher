@@ -1,0 +1,61 @@
+﻿@page
+ @model WebApplication1.Pages.Sessions.DetailsModel 
+
+@{
+    ViewData["Title"] = "Details";
+    int key = Model.SessionDb.session_key;
+    @functions {
+        // public void OnPost()
+        // {
+           
+        //     Response.Redirect("Sessions");
+
+
+
+
+        // }
+        
+        
+    }
+}
+
+<h1>@Html.DisplayFor(model => model.SessionDb.country_name)</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.SessionDb.circuit_short_name) @Html.DisplayFor(model => model.SessionDb.year)</h4>
+    <hr />
+    <dl class="row">
+        
+        <dt class="col-sm-2">
+            Start date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SessionDb.date_start)
+        </dd>
+        <dt class="col-sm-2">
+            End date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SessionDb.date_end)
+        </dd>
+
+        
+    </dl>
+</div>
+
+@* <form asp-page-handler="post">
+    <button onclick="" class="btn btn-default">Cancel</button>
+</form>
+
+<a class="btn btn-primary" href="@Url.Action("YourAction","SessionDbsController")">Click</a> *@
+
+<form method="post">
+    <fieldset>
+        <div>
+            <label>&nbsp;</label>
+            <input type="submit" value="View drivers" class="submit" />
+            <input type="hidden" name="session_key" value=@key />
+        </div>
+    </fieldset>
+</form>
+

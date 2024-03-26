@@ -26,8 +26,12 @@ namespace PlatformyProgramistyczneAPI
             //{
             //    Console.WriteLine(driver.last_name);
             //}
-            Run run = new Run();
-            run.RunProgram();
+            //Console.WriteLine("Version: " + System.Environment.Version.ToString());
+            DbManager run = new DbManager();
+            run.ReplaceDriversDbBySession(7787);
+            run.PrintDrivers();
+
+
             
         }
     }

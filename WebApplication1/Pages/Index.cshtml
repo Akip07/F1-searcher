@@ -1,0 +1,55 @@
+﻿@page
+@* @model IndexModel *@
+@{
+
+    ViewData["Title"] = "Home page";
+    
+    
+    
+    @functions
+    {
+        PlatformyProgramistyczneAPI.DbManager dbman = new PlatformyProgramistyczneAPI.DbManager();
+        
+
+        int year = new int();
+        string contactname = "";
+
+        public void OnPost()
+        {
+            year = Convert.ToInt32(Request.Form["year"]);
+            dbman.ReplaceSessionsDbByYear(year);
+            Response.Redirect("Sessions");
+
+            
+
+        
+    }
+    }
+
+
+}
+
+
+        <form method="post">
+            <fieldset>
+                
+                <div>
+                    <label for="Year">Year:</label>
+                    <input type="number" name="Year" value=2024 />
+                </div>
+
+                <div>
+                    <label>&nbsp;</label>
+                    @* <a asp-page="./Sessions"  type="submit"style="color: #3b3a3a; text-decoration: none; height: 100%; width:100%"> *@
+                        
+                    <input type="submit" value="Submit" class="submit" />
+                    @* </a> *@
+                </div>
+            </fieldset>
+        </form>
+
+
+
+
+
+

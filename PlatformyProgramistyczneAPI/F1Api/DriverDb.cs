@@ -6,11 +6,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("WebApplication3")]
+[assembly: InternalsVisibleTo("WebApplication1")]
 namespace PlatformyProgramistyczneAPI.F1Api
 {
     
-    internal class DriverDb : Driver
+    public class DriverDb : Driver
     {
         public int id { get; set; }
 

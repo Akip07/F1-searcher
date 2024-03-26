@@ -1,0 +1,34 @@
+﻿@page
+@model WebApplication1.Pages.Drivers.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Drivers</h1>
+
+
+
+    
+@foreach (var item in Model.DriverDb) {
+    <div class="item-block">
+        <a asp-page="./Details" asp-route-id="@item.id" style="color: #3b3a3a; text-decoration: none; height: 100%; width:100%">
+            <div style="display: flex; padding: 10px">
+                <img src=@item.headshot_url height="100px" width="100px" />
+                <div style="padding: 10px">
+                    <div style="font-size: 150%;">
+                        @Html.DisplayFor(modelItem => item.driver_number)
+                        @Html.DisplayFor(modelItem => item.full_name) 
+                    </div>
+
+                    <div>
+                        @Html.DisplayFor(modelItem => item.team_name)
+                         
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}
+    
+

@@ -7,10 +7,10 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
 
-[assembly: InternalsVisibleTo("WebApplication3")]
+[assembly: InternalsVisibleTo("WebApplication1")]
 namespace PlatformyProgramistyczneAPI.F1Api
 {
-    internal class OpenF1Api
+    public class OpenF1Api
     {
         public HttpClient client = new HttpClient();
         private string apiUrl = "https://api.openf1.org/v1";
@@ -33,6 +33,15 @@ namespace PlatformyProgramistyczneAPI.F1Api
             string call = apiUrl + $"/drivers?session_key={session_key}";
             string response = await client.GetStringAsync(call);
             
+            List<Driver> drivers = JsonSerializer.Deserialize<List<Driver>>(response);
+            return drivers;
+        }
+
+        public async Task<List<Driver>> GetTeamDrivers(string team)
+        {
+            string call = apiUrl + $"/drivers?team_name={team}";
+            string response = await client.GetStringAsync(call);
+
             List<Driver> drivers = JsonSerializer.Deserialize<List<Driver>>(response);
             return drivers;
         }
