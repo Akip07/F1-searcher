@@ -44,10 +44,7 @@ namespace WebApplication1.Pages.Sessions
         
         public IActionResult OnPost(int session_key)
         {
-            //PlatformyProgramistyczneAPI.DbManager dbman = new PlatformyProgramistyczneAPI.DbManager();
-            //dbman.ReplaceDriversDbBySession(session_key);
             return Redirect("/Drivers");
-
         }
     }
 }

@@ -21,11 +21,6 @@ namespace WebApplication1.Pages.Drivers
 
         public IList<DriverDb> DriverDb { get;set; } = default!;
 
-        //public async Task OnGetAsync()
-        //{
-        //    DriverDb = await _context.Drivers.ToListAsync();
-        //}
-
         public async Task OnGetAsync(int key=0)
         {
             if(key==0)

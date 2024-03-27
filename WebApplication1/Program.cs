@@ -13,10 +13,11 @@ namespace WebApplication1
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-
             builder.Services.AddDbContext<DriversDatabase>();
+
+
             DbManager run = new DbManager();
-            run.ClearDrivers();
+            //run.ClearDrivers();
             if(run.CheckIfDriversEmpty())
             run.ReplaceDriversDbBySession(7787);
 

@@ -37,6 +37,8 @@ namespace PlatformyProgramistyczneAPI.F1Api
             return drivers;
         }
 
+
+
         public async Task<List<Driver>> GetTeamDrivers(string team)
         {
             string call = apiUrl + $"/drivers?team_name={team}";
